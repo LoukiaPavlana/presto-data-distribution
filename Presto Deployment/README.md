@@ -1,13 +1,16 @@
 ## Presto Deployment
 ---
 ### References
+
 Instructions found here: https://prestodb.github.io/docs/current/installation/deployment.html
 Connectors: https://prestodb.github.io/docs/current/connector.html
 ---
 ### Overview
+
 Presto is an open source, distributed SQL query engine designed for fast, interactive queries on data in HDFS, and others. Unlike Hadoop/HDFS, it does not have its own storage system. Thus, Presto is complimentary to Hadoop, with organizations adopting both to solve a broader business challenge.
 ---
 ### Requirements
+
 #### Java
 
 ```jsx
