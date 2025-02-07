@@ -2,7 +2,7 @@
 
 ## References
 
-** Installation Guide[https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/data-directory-initialization.html]
+**[Installation Guide]https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/data-directory-initialization.html**
 
 ## Overview
 MySQL is a very popular Realational DBMS used for a variety of projects, of various scales. It is released under an open-source licence, it uses a standard form of the well-known SQL data language and has great compatibility on many operating systems. It will be used as part of the 3 databases comprising our trino experiments.
