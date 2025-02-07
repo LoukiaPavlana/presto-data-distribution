@@ -121,7 +121,7 @@ rm qlist.lst
 ```
 
 
-**Mapping the  queries to run on presto by running map_tables.sh:**
+**Mapping the  queries to run on presto by running map_tables.sh :**
 ```jsx
 #!/bin/bash
 
