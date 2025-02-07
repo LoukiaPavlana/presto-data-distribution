@@ -13,7 +13,7 @@ MongoDB is a non-relational document database that provides support for JSON-lik
 ```jsx
 cat /etc/lsb-release
 ```
-# Dependencies
+## Dependencies
 DISTRIB_ID=Ubuntu
 
 DISTRIB_RELEASE=16.04
