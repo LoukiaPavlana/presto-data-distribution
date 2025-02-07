@@ -72,7 +72,7 @@ cd ../tpc-ds/tools
 
 we added definition for _END
 
-from tpc-ds directory run add_end_to_tpl.sh : 
+**from tpc-ds directory run add_end_to_tpl.sh :**
 
 ```jsx
 #!/bin/bash
