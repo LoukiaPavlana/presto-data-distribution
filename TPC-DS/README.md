@@ -77,14 +77,10 @@ from tpc-ds directory run add_end_to_tpl.sh :
 ```jsx
 #!/bin/bash
 
-# Directory where the .tpl files are located
 TEMPLATE_DIR="query_templates"
 
-# Loop through all .tpl files in the template directory
 for tpl_file in $TEMPLATE_DIR/*.tpl; do
-  # Check if the file exists
   if [ -f "$tpl_file" ]; then
-    # Insert 'define _END = ";";' at the top of the .tpl file if not already present
     if ! grep -q "define _END" "$tpl_file"; then
       echo "define _END = \";\";" | cat - "$tpl_file" > temp && mv temp "$tpl_file"
       echo "Added define _END to $tpl_file"
@@ -108,7 +104,7 @@ mkdir -p ../../queries
 touch qlist.lst
 for i in $(seq 1 1 99)
 do
-  echo "query$i.tpl" >> qlist.lst # to create each query in a different file, each time write a new template name into the qlist file
+  echo "query$i.tpl" >> qlist.lst 
   ./dsqgen \
   -DIRECTORY ../query_templates \
   -INPUT qlist.lst \
@@ -118,7 +114,7 @@ do
   -DIALECT netezza \
   -OUTPUT_DIR ../../queries
 
-  mv ../../queries/query_0.sql ../../queries/"query$i.sql" # output of dsqgen for 1 query variant/query is query_0.sql regardless of the query template
+  mv ../../queries/query_0.sql ../../queries/"query$i.sql" 
 
 done
 rm qlist.lst
