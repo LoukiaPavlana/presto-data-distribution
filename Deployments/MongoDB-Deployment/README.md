@@ -14,7 +14,7 @@ DISTRIB_RELEASE=16.04
 DISTRIB_CODENAME=xenial
 DISTRIB_DESCRIPTION="Ubuntu 16.04.7 LTS"
 
-## Import the MongoDB Public Key
+### Import the MongoDB Public Key
 
 MongoDB requires a public key to verify the packages. Run this command to import it:
 
@@ -22,7 +22,7 @@ MongoDB requires a public key to verify the packages. Run this command to import
 wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
 ```
 
-## Create the MongoDB List File
+### Create the MongoDB List File
 
 Next, add the MongoDB repository to your package manager sources. For **Ubuntu 16.04**, run:
 
@@ -32,7 +32,7 @@ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongod
 
 This command sets the MongoDB 4.4 repository. MongoDB 4.4 is compatible with Ubuntu 16.04 (Xenial).
 
-## Update Package Database
+### Update Package Database
 
 Update your local package database to include the MongoDB packages:
 
@@ -40,7 +40,7 @@ Update your local package database to include the MongoDB packages:
 sudo apt-get update
 ```
 
-## Install MongoDB
+### Install MongoDB
 
 Now, install MongoDB by running:
 
@@ -50,7 +50,7 @@ sudo apt-get install -y mongodb-org
 
 This will install the MongoDB server along with its related tools.
 
-## Start MongoDB
+### Start MongoDB
 
 Once the installation is complete, you can start the MongoDB service:
 
@@ -58,7 +58,7 @@ Once the installation is complete, you can start the MongoDB service:
 sudo systemctl start mongod
 ```
 
-## Enable MongoDB to Start on Boot
+### Enable MongoDB to Start on Boot
 
 To make sure MongoDB starts automatically on boot:
 
@@ -66,7 +66,7 @@ To make sure MongoDB starts automatically on boot:
 sudo systemctl enable mongod
 ```
 
-## Verify Installation
+### Verify Installation
 
 To confirm that MongoDB is running properly, use:  **To run mongo shell: mongosh**
 
