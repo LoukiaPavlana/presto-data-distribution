@@ -3,6 +3,11 @@
 # References
 * [Installation Guide](https://www.digitalocean.com/community/tutorials/how-to-configure-remote-access-for-mongodb-on-ubuntu-20-04)
 
+# Overview
+MongoDB is a non-relational document database that provides support for JSON-like storage. The MongoDB database has a flexible data model that enables you to store unstructured data, and it provides full indexing support, and replication with rich and intuitive APIs.
+
+# Deployment
+
 ## Version:
 
 ```jsx
@@ -10,8 +15,11 @@ cat /etc/lsb-release
 ```
 # Dependencies
 DISTRIB_ID=Ubuntu
+
 DISTRIB_RELEASE=16.04
+
 DISTRIB_CODENAME=xenial
+
 DISTRIB_DESCRIPTION="Ubuntu 16.04.7 LTS"
 
 ### Import the MongoDB Public Key
