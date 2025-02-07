@@ -55,7 +55,7 @@ mkdir catalog
 
 ### In the [node.properties](http://node.properties) we added the following lines:
 
-For MySQL: 
+**For MySQL:** 
 
 ```jsx
 node.environment=production
@@ -63,7 +63,7 @@ node.id=machine_mysql
 node.data-dir=/var/presto/data
 ```
 
-For MongoDB: 
+**For MongoDB:** 
 
 ```jsx
 node.environment=production
@@ -71,7 +71,7 @@ node.id=mongo_worker
 node.data-dir=/var/presto/data
 ```
 
-For Memory: 
+**For Memory:** 
 
 ```jsx
 node.environment=production
@@ -105,7 +105,7 @@ node.data-dir=/var/presto/data
 
 ### In the [config.properties](http://config.properties) we added the following lines:
 
-For MySQL: 
+**For MySQL:** 
 
 ```jsx
 coordinator=true
@@ -121,7 +121,7 @@ node.internal-address=[2001:648:2ffe:501:cc00:13ff:fe68:a322]
 
 ```
 
-For MongoDB:
+**For MongoDB:**
 
 ```jsx
 coordinator=false
@@ -135,7 +135,7 @@ node.internal-address=[2001:648:2ffe:501:cc00:13ff:feef:b688]
 
 ```
 
-For Memory: 
+**For Memory:** 
 
 ```jsx
 coordinator=false
@@ -162,30 +162,30 @@ io.prestosql.server=DEBUG
 
 ### **Inside the presto/etc/catalog directory we add the following connectors:**
 
-In mysql.properties:
+**In mysql.properties:**
 
 ```jsx
 connector.name=mysql
 connection-url=jdbc:mysql://localhost:3306/?useSSL=false
 connection-user=mysql_presto_user
-connection-password=Str0ng!Passw0rd
+connection-password='password'
 ```
 
-In mongodb.properties:
+**In mongodb.properties:**
 
 ```jsx
 connector.name=mongodb
 mongodb.seeds=83.212.75.178:27017
 ```
 
-In memory.properties:
+**In memory.properties:**
 
 ```jsx
 connector.name=memory
 memory.max-data-per-node=128MB
 ```
 
-In tpcds.properties:
+**In tpcds.properties:**
 
 ```jsx
 connector.name=tpcds
