@@ -121,64 +121,97 @@ rm qlist.lst
 ```
 
 
-**Mapping the  queries to run on presto:**
+**Mapping the  queries to run on presto by running map_tables.sh:**
 ```jsx
-import os
+#!/bin/bash
 
-# Define table mappings with catalog and database
-table_mappings = {
-    'store_returns': 'mongodb.mongodb_presto.store_returns',
-    'date_dim': 'memory.default.date_dim',
-    'store': 'memory.default.store',
-    'customer': 'memory.default.customer',
-    'web_returns': 'mongodb.mongodb_presto.web_returns',
-    'catalog_sales': 'mongodb.mongodb_presto.catalog_sales',
-    'catalog_returns': 'mongodb.mongodb_presto.catalog_returns',
-    'web_sales': 'mongodb.mongodb_presto.web_sales',
-    'store_sales': 'mongodb.mongodb_presto.store_sales',
-    'catalog_page': 'mongodb.mongodb_presto.catalog_page',
-    'inventory': 'mysql.prestodb.inventory',
-    'warehouse': 'mysql.prestodb.warehouse',
-    'item': 'mysql.prestodb.item',
-    'time_dim': 'memory.default.time_dim',
-    'customer_address': 'memory.default.customer_address',
-    'household_demographics': 'memory.default.household_demographics',
-    'reason': 'memory.default.reason',
-    'income_band': 'memory.default.income_band',
-    'ship_mode': 'memory.default.ship_mode',
-    'call_center': 'memory.default.call_center',
-    'promotion': 'memory.default.promotion',
-    'web_site': 'memory.default.web_site',
-    'customer_demographics': 'memory.default.customer_demographics'
-}
+INPUT_DIR=$1
+OUT_DIR=$2
 
-# Path to the folder containing queries
-queries_folder = 'ready_queries/'
+# Check if two arguments are provided
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <input_directory> <output_directory>"
+    exit 1
+fi
 
-# Function to update the queries
-def update_query(query):
-    for old_table, new_table in table_mappings.items():
-        # Replace the table names but not the column names
-        query = query.replace(" {}".format(old_table), " {}".format(new_table))
-        query = query.replace("({}".format(old_table), "({}".format(new_table))
-        query = query.replace("{}.{}".format(old_table, ""), "{}.{}".format(new_table, ""))
-    return query
+# Check if input directory exists
+if [ ! -d "$INPUT_DIR" ]; then
+    echo "Error: Directory '$INPUT_DIR' does not exist."
+    exit 1
+fi
 
-# Process each SQL file in the folder
-for filename in os.listdir(queries_folder):
-    if filename.endswith('.sql'):
-        filepath = os.path.join(queries_folder, filename)
+# Create output directory if it doesn't exist
+if [ ! -d "$OUT_DIR" ]; then
+    echo "Creating output directory: $OUT_DIR"
+    mkdir -p "$OUT_DIR"
+fi
 
-        with open(filepath, 'r') as file:
-            query = file.read()
+# Define table mappings with the corresponding database and catalog
+TABLE_MAPPING="store_returns:mongodb.mongodb1
+web_returns:mongodb.mongodb1
+catalog_sales:mongodb.mongodb1
+catalog_returns:mongodb.mongodb1
+web_sales:mongodb.mongodb1
+store_sales:mongodb.mongodb1
+catalog_page:mongodb.mongodb1
+web_page:mongodb.mongodb1
+date_dim:mysql.prestodb
+inventory:mysql.prestodb
+warehouse:mysql.prestodb
+item:mysql.prestodb
+store:memory.default
+customer:memory.default
+time_dim:memory.default
+customer_address:memory.default
+household_demographics:memory.default
+reason:memory.default
+income_band:memory.default
+ship_mode:memory.default
+call_center:memory.default
+promotion:memory.default
+web_site:memory.default
+customer_demographics:memory.default"
 
-        updated_query = update_query(query)
+# Process each .sql file in the input directory
+for QUERY_FILE in "$INPUT_DIR"/*.sql; do
+    if [ -f "$QUERY_FILE" ]; then
+        echo "Processing file: $QUERY_FILE"
 
-        # Write the updated query back to the file (or to a new file)
-        with open(filepath, 'w') as file:
-            file.write(updated_query)
+        # Generate the output file path
+        OUTPUT_FILE="$OUT_DIR/$(basename "$QUERY_FILE")"
 
-        print("Updated" + filename)
+        # Backup the original query file before processing
+        cp "$QUERY_FILE" "$QUERY_FILE.bak"
+        echo "Backup created: $QUERY_FILE.bak"
 
+        # Process each mapping and replace the table names
+        for mapping in $TABLE_MAPPING; do
+            TABLE_OLD=$(echo $mapping | cut -d':' -f1)
+            DB=$(echo $mapping | cut -d':' -f2)
+
+            case $DB in
+            "mysql.prestodb")
+                TABLE_NEW=mysql.prestodb.$TABLE_OLD ;;
+            "mongodb.mongodb1")
+                TABLE_NEW=mongodb.mongodb1.$TABLE_OLD ;;
+            "memory.default")
+                TABLE_NEW=memory.default.$TABLE_OLD ;;
+            *)
+                echo "Unknown database mapping: $DB"; exit 1 ;;
+            esac
+
+            echo "Replacing: $TABLE_OLD -> $TABLE_NEW"
+
+            # Use sed to replace the table name in the file, respecting word boundaries
+            sed -i "s/\b$TABLE_OLD\b/$TABLE_NEW/g" "$QUERY_FILE"
+        done
+
+        # Move the updated file to the output directory
+        mv "$QUERY_FILE" "$OUTPUT_FILE"
+        echo "Query file updated: $OUTPUT_FILE"
+    else
+        echo "No .sql files found in the directory."
+    fi
+done
 
 ```
