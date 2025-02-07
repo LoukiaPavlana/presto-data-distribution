@@ -6,7 +6,7 @@
 ./presto-290/presto --file ~/memory_populate.sql
 ```
 
-From presto's cli we run the following script to populate the main memory
+**From presto's cli we run the following script to populate the main memory**
 
 ```jsx
 CREATE TABLE memory.default.customer_address AS
