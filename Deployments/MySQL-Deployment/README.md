@@ -22,27 +22,28 @@ When MySQL was created these were the default parameters:
 * password→ blank
 
 Connect to MySQL:
-    sudo mysql -u root -p    
+```
+    sudo mysql -u root -p
+```    
 Create new user:
-
+```
 CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password'; 
-
+```
 Grant Permissions:
-
+```
 GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
-
 FLUSH PRIVILEGES;
-
+```
 Create Database:
-
+```
 CREATE DATABASE mydb;
-
+```
 Access Database:
-
+```
 USE mydb;
-
+```
 Create table:
-
+```
 CREATE TABLE employees (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), position VARCHAR(255));
-
+```
 
