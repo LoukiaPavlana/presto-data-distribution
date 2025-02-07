@@ -59,7 +59,7 @@ For MySQL:
 
 ```jsx
 node.environment=production
-node.id=mysql_coordinator
+node.id=machine_mysql
 node.data-dir=/var/presto/data
 ```
 
@@ -75,29 +75,32 @@ For Memory:
 
 ```jsx
 node.environment=production
-node.id=memory_worker
+node.id=memory_machine
 node.data-dir=/var/presto/data
 ```
 
-For Machine 4:
-
-```jsx
-node.environment=production
-node.id=machine4
-node.data-dir=/var/presto/data
-```
 
 ### In the jvm.config we added the following lines: /code
 
 ```jsx
 -server
--Xmx16G
+-Xmx6G
 -XX:+UseG1GC
 -XX:G1HeapRegionSize=32M
 -XX:+UseGCOverheadLimit
 -XX:+ExplicitGCInvokesConcurrent
 -XX:+HeapDumpOnOutOfMemoryError
+-XX:-OmitStackTraceInFastThrow
+-XX:ReservedCodeCacheSize=512M
+-XX:PerMethodRecompilationCutoff=10000
+-XX:PerBytecodeRecompilationCutoff=10000
+-Djdk.nio.maxCachedBufferSize=2000000
+-XX:+UnlockDiagnosticVMOptions
 -XX:+ExitOnOutOfMemoryError
+-XX:InitiatingHeapOccupancyPercent=30
+-XX:G1ReservePercent=20
+-XX:MaxGCPauseMillis=200
+
 ```
 
 ### In the [config.properties](http://config.properties) we added the following lines:
@@ -105,27 +108,31 @@ node.data-dir=/var/presto/data
 For MySQL: 
 
 ```jsx
-coordinator=false
-#node-scheduler.include-coordinator=true
+coordinator=true
+node-scheduler.include-coordinator=true
 http-server.http.port=8080
 query.max-memory=2GB
-query.max-memory-per-node=1GB
-query.max-total-memory-per-node=2GB
-#discovery-server.enabled=true
-discovery.uri=http://83.212.75.178:8080
+query.max-total-memory=4GB
+query.max-memory-per-node=2GB
+query.max-total-memory-per-node=2.5GB
+discovery-server.enabled=true
+discovery.uri=http://[2001:648:2ffe:501:cc00:13ff:fe68:a322]:8080
+node.internal-address=[2001:648:2ffe:501:cc00:13ff:fe68:a322]
+
 ```
 
 For MongoDB:
 
 ```jsx
-coordinator=true
-node-scheduler.include-coordinator=true
+coordinator=false
 http-server.http.port=8080
 query.max-memory=2GB
-query.max-memory-per-node=1GB
-query.max-total-memory-per-node=2GB
-#discovery-server.enabled=true
-discovery.uri=http://83.212.75.178:8080
+query.max-total-memory=4GB
+query.max-memory-per-node=2GB
+query.max-total-memory-per-node=2.5GB
+discovery.uri=http://[2001:648:2ffe:501:cc00:13ff:fe68:a322]:8080
+node.internal-address=[2001:648:2ffe:501:cc00:13ff:feef:b688]
+
 ```
 
 For Memory: 
@@ -134,25 +141,23 @@ For Memory:
 coordinator=false
 http-server.http.port=8080
 query.max-memory=2GB
-query.max-memory-per-node=1GB
-query.max-total-miscovery.uri=http://83.212.75.178:8080
-```
+query.max-total-memory=4GB
+query.max-memory-per-node=2GB
+query.max-total-memory-per-node=2.5GB
+discovery.uri=http://[2001:648:2ffe:501:cc00:13ff:fe68:a322]:8080
 
-For machine 4: 
+node.internal-address=[2001:648:2ffe:501:cc00:13ff:fe51:6f0b]
+~
 
-```jsx
-coordinator=false
-http-server.http.port=8080
-query.max-memory=2GB
-query.max-memory-per-node=1GB
-query.max-total-memory-per-node=2GB
-discovery.uri=http://83.212.75.178:8080
 ```
 
 [log.properties](http://log.properties) (optional)
 
 ```jsx
-io.prestosql=INFO
+io.prestosql=DEBUG
+io.prestosql.execution=DEBUG
+io.prestosql.server=DEBUG
+
 ```
 
 ### **Inside the presto/etc/catalog directory we add the following connectors:**
