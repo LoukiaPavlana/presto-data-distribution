@@ -54,3 +54,9 @@ db.createCollection("catalog_page")
 from root folder:
 
 ### some usefull commands:
+
+```jsx
+use mongodb1; #switch database or create
+db.catalog_page.countDocuments() #show number of entries
+db.catalog_page.find().pretty() #show entries
+```
