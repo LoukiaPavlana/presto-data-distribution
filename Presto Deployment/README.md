@@ -50,7 +50,8 @@ touch log.properties
 mkdir catalog
 ```
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/76d97b0a-80da-4d19-89b9-63074569edb2/f0017952-3fa5-4c98-8bf9-c84a05265188/image.png)
+![image](https://github.com/user-attachments/assets/8b75e331-5793-4039-8eff-7699c787b222)
+
 
 ### In the [node.properties](http://node.properties) we added the following lines:
 
