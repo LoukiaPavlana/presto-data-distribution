@@ -23,7 +23,7 @@ When MySQL was created these were the default parameters:
 
 **Connect to MySQL:**
 ```jsx
-    sudo mysql -u root -p
+sudo mysql -u root -p
 ```    
 **Create new user:**
 ```jsx
