@@ -164,23 +164,23 @@ io.prestosql.server=DEBUG
 
 ```jsx
 connector.name=mysql
-connection-url=jdbc:mysql://localhost:3306/?useSSL=false
+connection-url=jdbc:mysql://83.212.75.173:3306/?useSSL=false&serverTimezone=UTC
 connection-user=mysql_presto_user
-connection-password='password'
+connection-password=<your password here>
 ```
 
 **In mongodb.properties:**
 
 ```jsx
 connector.name=mongodb
-mongodb.seeds=83.212.75.178:27017
+mongodb.seeds=192.168.0.1:27017
 ```
 
 **In memory.properties:**
 
 ```jsx
 connector.name=memory
-memory.max-data-per-node=128MB
+memory.max-data-per-node=512MB
 ```
 
 **In tpcds.properties:**
