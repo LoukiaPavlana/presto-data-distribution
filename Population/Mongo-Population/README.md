@@ -55,7 +55,12 @@ from root folder:
 ```jsx
 python catalog_page.py
 python catalog_returns.py
-...
+python catalog_sales.py
+python store_returns.py
+python store_sales.py
+python web_page.py
+python web_returns.py
+python web_sales.py
 ```
 
 ### some usefull commands:
