@@ -53,7 +53,9 @@ db.createCollection("catalog_page")
 
 from root folder:
 python web_sales.py
+
 python web_returns.py
+
 ...
 
 ### some usefull commands:
