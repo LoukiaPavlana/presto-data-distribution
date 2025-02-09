@@ -3,8 +3,8 @@
 ## 1. Create the database and tables
 
 ```jsx
-CREATE DATABASE mysql_1;
-USE mysql_1;
+CREATE DATABASE prestodb;
+USE prestodb;
 ```
 ## 2. Create the tables
 **warehouse table:** 
