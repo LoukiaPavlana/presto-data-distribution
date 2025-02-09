@@ -1,12 +1,12 @@
 # Main Mem Population
 
-## Create all tables together by running :
+##(Option 1) Create all tables together by running :
 
 ```jsx
-./presto-290/presto --file ~/memory_populate.sql
+./presto-290/load_memory_tables.sh
 ```
 
-**From presto's cli we run the following script to populate the main memory**
+**(Option 2) From presto's cli we run the following script to populate the main memory**
 
 ```jsx
 CREATE TABLE memory.default.customer_address AS
