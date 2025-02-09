@@ -124,7 +124,7 @@ sudo cp tpc-ds/data/date_dim.dat /var/lib/mysql-files/
 ### 4. Populate tables
 
 ```jsx
-USE mysql_1;
+USE prestodb;
 ```
 
 **date_dim:**
