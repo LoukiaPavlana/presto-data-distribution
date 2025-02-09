@@ -34,7 +34,7 @@ mongosh
 ### 3. Create db
 
 ```jsx
-use mongodb_presto;
+use mongodb1;
 ```
 
 ### 4. Create Collections for each table
