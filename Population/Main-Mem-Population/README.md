@@ -1,6 +1,6 @@
 # Main Mem Population
 
-##(Option 1) Create all tables together by running :
+**(Option 1) Create all tables together by running :**
 
 ```jsx
 ./presto-290/load_memory_tables.sh
