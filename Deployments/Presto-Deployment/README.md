@@ -145,9 +145,7 @@ query.max-total-memory=4GB
 query.max-memory-per-node=2GB
 query.max-total-memory-per-node=2.5GB
 discovery.uri=http://[2001:648:2ffe:501:cc00:13ff:fe68:a322]:8080
-
 node.internal-address=[2001:648:2ffe:501:cc00:13ff:fe51:6f0b]
-~
 
 ```
 
