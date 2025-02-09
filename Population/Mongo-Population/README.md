@@ -52,6 +52,9 @@ db.createCollection("catalog_page")
 ### 5. Run Custom Scripts for each table
 
 from root folder:
+python web_sales.py
+python web_returns.py
+...
 
 ### some usefull commands:
 
